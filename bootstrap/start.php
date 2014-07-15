@@ -24,13 +24,35 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-$env = $app->detectEnvironment(array(
+// $env = $app->detectEnvironment(array(
 
-	// 'local' => array('*'),
-	'development' => array('your-machine-name'),
+// 	// 'local' => array('*'),
+// 	'development' => array('Jeannie_Harvard'),
 
 
-));
+// ));
+
+$env = $app->detectEnvironment(function()
+{
+
+    # First see if LARAVEL_ENV exists - It's a global env in Pagoda's 
+    # Boxfile that will set the environment (typically 'production')
+    if(isset($_ENV['LARAVEL_ENV'])) 
+    {
+        # If it does exist, use it
+        return $_ENV['LARAVEL_ENV'];
+    }
+    # Otherwise, defer to this machine's environment file to return 
+    # the environment (i.e. 'local' or 'production')
+    else if(file_exists(__DIR__.'/../environment.php')) 
+    {
+        return require __DIR__.'/../environment.php';
+    }
+    else {
+        dd('Missing LARAVEL_ENV or environment.php file');
+    }
+
+});
 
 /*
 |--------------------------------------------------------------------------
