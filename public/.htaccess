@@ -5,6 +5,9 @@
 
     RewriteEngine On
 
+    # JC : ADDING BELOW FROM https://www.youtube.com/watch?v=qhHb2i2REBU
+    # RewriteBase /laravel/public 
+
     # Redirect Trailing Slashes...
     RewriteRule ^(.*)/$ /$1 [L,R=301]
 

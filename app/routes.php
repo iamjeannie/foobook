@@ -14,4 +14,14 @@
 Route::get('/', function()
 {
 	return View::make('hello');
+	// echo "Yo Dude!";
 });
+
+Route::get('/Hello',function()
+{
+	echo "Yo Dude!";
+});
+
+Route::get('/books', function() {
+    return 'Here are all the books...';
+}); 
